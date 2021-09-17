@@ -50,9 +50,9 @@ func Sender(conn net.Conn) {
 		return
 	}()
 
-	for {
+	for { // send message
 		go func() {
-			for {
+			for { // receive message
 				n, err := conn.Read(buf)
 				if err != nil {
 					fmt.Printf("error during reading from connection, err: %v \n", err)

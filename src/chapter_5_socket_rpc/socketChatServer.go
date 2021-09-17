@@ -70,7 +70,7 @@ func handlerConn(c net.Conn) {
 				fmt.Printf("currently existing conn: %v \n", ConnSlice)
 				continue
 			}
-			conn.Write(buf[0:n]) // other connection
+			conn.Write(buf[0:n]) // other connection, send the message from current conn
 		}
 	}
 }
