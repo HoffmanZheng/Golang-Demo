@@ -5,8 +5,9 @@ import (
 	"encoding/json"
 	"endpoint"
 	"errors"
-	"log"
 	"net/http"
+
+	"github.com/go-kit/kit/log"
 
 	"github.com/go-kit/kit/transport"
 	kithttp "github.com/go-kit/kit/transport/http"
@@ -29,27 +30,27 @@ func MakeHttpHandler(ctx context.Context, endpoints endpoint.DiscoveryEndPoints,
 		kithttp.ServerErrorEncoder(encodeError),
 	}
 	// SayHello 接口
-	r.Methods("GET").Path("/sayHello").Handler(kithttp.NewServer{
+	r.Methods("GET").Path("/sayHello").Handler(kithttp.NewServer(
 		endpoints.SayHelloEndPoint,
 		decodeSayHelloRequest,
 		encodeJsonResponse,
 		options...,
-	})
+	))
 	// 服务发现接口
-	r.Methodes("GET").Path("/discovery").Handler(kithttp.NewServer{
-		endendpoints.DiscoveryEndpoint,
+	r.Methods("GET").Path("/discovery").Handler(kithttp.NewServer(
+		endpoints.DiscoveryEndPoint,
 		decodeDiscoveryRequest,
 		encodeJsonResponse,
 		options...,
-	})
+	))
 	// create health check handler
-	r.Methods("GET").Path("/health").Handler(kithttp.NewServer{
-		enendpoints.HealthCheckEndpoint,
+	r.Methods("GET").Path("/health").Handler(kithttp.NewServer(
+		endpoints.HealthCheckEndPoint,
 		decodeHealthCheckRequest,
 		encodeJsonResponse,
 		options...,
-	})
-	return
+	))
+	return r
 }
 
 func decodeSayHelloRequest(_ context.Context, r *http.Request) (interface{}, error) {
@@ -62,7 +63,7 @@ func decodeDiscoveryRequest(_ context.Context, r *http.Request) (interface{}, er
 		return nil, ErrorBadRequest
 	}
 	return endpoint.DiscoveryRequest{
-		serviceName: serviceName,
+		ServiceName: serviceName,
 	}, nil
 }
 
@@ -70,7 +71,7 @@ func decodeHealthCheckRequest(ctx context.Context, r *http.Request) (interface{}
 	return endpoint.HealthRequest{}, nil
 }
 
-func encodeJsonResponse(ctx context.Context, w http.ResponseWriter, 
+func encodeJsonResponse(ctx context.Context, w http.ResponseWriter,
 	response interface{}) error {
 	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	return json.NewEncoder(w).Encode(response)
@@ -79,10 +80,10 @@ func encodeJsonResponse(ctx context.Context, w http.ResponseWriter,
 func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json;charset=utf-8")
 	switch err {
-	default: 
+	default:
 		w.WriteHeader(http.StatusInternalServerError)
 	}
-	json.NewEncoder(w).Encode(map[string]interface{} {
-		"error" : err.Error(),
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"error": err.Error(),
 	})
 }

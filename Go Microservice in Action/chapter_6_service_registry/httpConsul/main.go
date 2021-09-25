@@ -14,9 +14,12 @@ import (
 	"strconv"
 	"syscall"
 	"transport"
+
+	uuid "github.com/satori/go.uuid"
 )
 
 func main() {
+	//  consul　启动命令：consul agent -dev
 	// 从命令行读取相关参数，没有时使用默认值
 	var (
 		servicePort = flag.Int("service.port", 10086, "service port")
@@ -31,6 +34,7 @@ func main() {
 
 	// TODO: 没有初始化服务发现客户端
 	var discoveryClient discover.DiscoveryClient
+	discoveryClient = discover.NewMyDiscoverClient(*consulHost, *consulPort) // 省略了获取服务发现客户端失败的处理
 	var svc = service.NewDiscoveryServiceImpl(discoveryClient)
 	sayHelloEndPoint := endpoint.MakeSayHelloEndPoint(svc)
 	discoveryEndpoint := endpoint.MakeDiscoveryEndPoint(svc)
@@ -41,7 +45,7 @@ func main() {
 		HealthCheckEndPoint: healthEndpoint,
 	}
 	// 创建 http.Handler
-	r := transport.MakeHttpHandler(ctx, endpts, config.Logger)
+	r := transport.MakeHttpHandler(ctx, endpts, config.KitLogger)
 	instanceId := *serviceName + "-" + uuid.NewV4().String()
 
 	// 启动 http server
@@ -59,7 +63,7 @@ func main() {
 	go func() {
 		// 监控系统信号，等待 ctrl + c 系统信号通知服务关闭
 		c := make(chan os.Signal, 1)
-		signal.Notify(c, syscall.SIGINT, syncall.SIGTERM)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
 		errChan <- fmt.Errorf("%s", <-c)
 	}()
 

@@ -12,7 +12,13 @@ require transport v0.0.0
 
 require config v0.0.0
 
-require github.com/satori/go.uuid v1.2.0 // indirect
+require (
+	github.com/go-kit/kit v0.12.0 // indirect
+	github.com/go-kit/log v0.2.0 // indirect
+	github.com/go-logfmt/logfmt v0.5.1 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/satori/go.uuid v1.2.0
+)
 
 replace discover => ./discover
 
