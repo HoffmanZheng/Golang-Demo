@@ -87,5 +87,63 @@
 
 ### Data Type
 
-1. Go also has several schema-based data types. Int and uint have 4-bytes on 32-bits OS, but have 8-bytes on 64-bits OS. 
+1. Go also has several **schema-based** data types. Int and uint have 4-bytes on 32-bits OS, but have 8-bytes on 64-bits OS. 
+
+2. String declared with double quote is interpretable, and supports escaping, whereas string declared with **backquote** is used to create native string literals and does not support escaping.
+
+3. Byte in string could be exacted by using index: `str[index]`, but it's not reliable, because several characters may have multiple bytes. Thus a rune slice could be used:
+
+   ```go
+   str := "i love go web"
+   chars := []rune(str)
+   for _, char := range chars {
+   	fmt.Println(string(char))
+   }
+   ```
+
+4. String is also immutable in Golang. Operation `+` and `+=` is not a efficient way, it's better to use StringBuilder:
+
+   ```go
+   var buffer bytes.Buffer
+   for {
+   	if piece, ok := getNextString();ok {
+   		buffer.WriteString(piece)
+   	} else {
+   		break
+   	}
+   }
+   fmt.Println(buffer.String())
+   ```
+
+5. Pointer, See: [4.pointer.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go%20Web%20in%20Action/chapter_1_elemantary/4.pointer.go)
+
+6. Array
+
+   ```go
+   var name[SIZE] type    // declaration
+   var numbers = [5]float32{100.0, 8.0, 9.4, 6.8, 30.1}
+   var numbers = [...]float32{100.0, 8.0, 9.4, 6.8, 30.1}
+   ```
+
+7. Slice is a reference to a continuous segment
+
+   ```go
+   var slicestr []string  // declaration 
+   make([]Type, size, cap)
+   ```
+
+8. Map
+
+   ```go
+   var name map[key_type]value_type  // declaration
+   createdMap := make(map[string]float32)  // could specify cap in the end
+   literalMap = map[string]string{"first": "go", "second": "web"}
+   
+   ```
+
+### Function
+
+### OOP
+
+
 
