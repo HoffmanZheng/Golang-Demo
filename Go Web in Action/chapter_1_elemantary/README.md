@@ -138,12 +138,141 @@
    var name map[key_type]value_type  // declaration
    createdMap := make(map[string]float32)  // could specify cap in the end
    literalMap = map[string]string{"first": "go", "second": "web"}
-   
    ```
 
 ### Function
 
+1. Function in Golang could return multiple value
+
+   ```go
+   func compare(x, y int) (int, int) {
+   	return x+y, x*y
+   }
+   ```
+
+2. Variable parameter is also supported in Golang function
+
+   ```go
+   func myFunc(arg ...string) {
+   	...   // arg is a string slice
+   }
+   ```
+
+3. Function parameters are value transfered by default, which does not change the original variable. Reference transfer could be implemented by using pointer as parameters, which pass the address of variable and modify the variable during the call process.
+
+   ```go
+   func exchange(x *int, y *int) int {...}
+   ```
+
+4. Anonymous function (closure): could use variable in function without declaration. It could also be used for callback, passing the function as parameter.
+
+   ```go
+   func main() {
+   	x, y := 6, 8
+   	defer func(a int) {
+   		fmt.Println("defer x, y = ", a, y) //y is closure reference
+       // defer x, y = 6 108
+   	}(x)   // passing parameter
+   	x += 10
+   	y += 100
+   	fmt.Println(x, y)   // 16 108
+   }
+   
+   ////////
+   
+   func main() {
+   	//call after declaration
+   	f := func(data int) {
+   		fmt.Println("closure", data)
+   	}
+   	f(6)
+   
+   	// call directly
+   	func(data int) {
+   		fmt.Println("closure, directly", data)
+   	}(8)
+   }
+   
+   /////////
+   
+   func visitPrint(list []int, f func(int)) {  // callback function
+   	for _, value := range list {
+   		f(value)
+   	}
+   }
+   
+   func main() {
+   	sli := []int{1, 6, 8}
+   	visitPrint(sli, func(value int) {
+   		fmt.Println(value)
+   	})
+   }
+   ```
+
+5. `defer` delay function performs action **after** return or panic of function. defer statements would be pushed into a stack, and pop out when function finished, so it's in LIFO order.
+
+   ```go
+   var name string = "go"
+   
+   func myfunc() string {
+   	defer func() {
+   		name = "python"	
+   	}()
+   
+   	fmt.Printf("name in myfunc: %s\n", name)
+   	return name	
+   }
+   
+   func main() {
+   	myname := myfunc()
+   	fmt.Printf("name in main func: %s\n", name)
+   	fmt.Printf("myname in main func: %s\n", myname)
+   }
+   
+   // name in myfunc: go
+   // name in main func: python
+   // myname in main func: go    // return before defer
+   ```
+
 ### OOP
+
+1. Encapsulation:
+
+   1. Encapsulate attributes in struct, the capitalization of the first letter is used to control the accessibility, rather than public, private modifier.
+
+   2. Method in Golang is a function working on a receiver.
+
+      ```go
+      func (recv recv_type) methodName(parameter_list) (return_value_list) {...}
+      ```
+
+2. Inherit
+
+   1. There is no `extends` keyword in Golang, inherit could be implemented by embedding anonymous types in struct.
+
+      ```go
+      type Engine interface {
+      	Run()
+      	Stop()
+      }
+      
+      type Bus struct {
+      	Engine
+      }
+      
+      func (c *Bus) Working() {
+      	c.Run()
+      	c.Stop()
+      }
+      ```
+
+3. Polymorphism
+
+   1. Implements of interface with different receiver 
+
+### Reflection
+
+### Unit test
 
 
 
