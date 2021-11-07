@@ -6,8 +6,8 @@
 
    ```go
    import (
-   	_ "os"
-   	alias "fmt"
+     _ "os"
+     alias "fmt"
    )
    ```
 
@@ -48,7 +48,7 @@
      }
      return
      breakTag:
-     	fmt.Println("done")
+       fmt.Println("done")
    }
    ```
 
@@ -58,12 +58,12 @@
 
    ```go
    m := map[string]int{
-   	"shirdon": 100,
-   	"ronger": 98,
+     "shirdon": 100,
+     "ronger": 98,
    }
    
    for _, value := range m {
-   	fmt.Println(value)
+     fmt.Println(value)
    }
    ```
 
@@ -74,14 +74,14 @@
    ```go
    var language = "golang"
    switch language {
-   	case "golang", "java":
-   		fmt.Println("popular languages")
+     case "golang", "java":
+       fmt.Println("popular languages")
    }
    
    var r int = 6
    switch {
-   	case r > 1 && r < 10:
-   		fmt.Println(r)
+     case r > 1 && r < 10:
+       fmt.Println(r)
    }
    ```
 
@@ -97,7 +97,7 @@
    str := "i love go web"
    chars := []rune(str)
    for _, char := range chars {
-   	fmt.Println(string(char))
+     fmt.Println(string(char))
    }
    ```
 
@@ -106,11 +106,11 @@
    ```go
    var buffer bytes.Buffer
    for {
-   	if piece, ok := getNextString();ok {
-   		buffer.WriteString(piece)
-   	} else {
-   		break
-   	}
+     if piece, ok := getNextString();ok {
+       buffer.WriteString(piece)
+     } else {
+       break
+     }
    }
    fmt.Println(buffer.String())
    ```
@@ -146,7 +146,7 @@
 
    ```go
    func compare(x, y int) (int, int) {
-   	return x+y, x*y
+     return x+y, x*y
    }
    ```
 
@@ -154,7 +154,7 @@
 
    ```go
    func myFunc(arg ...string) {
-   	...   // arg is a string slice
+     ...   // arg is a string slice
    }
    ```
 
@@ -168,44 +168,44 @@
 
    ```go
    func main() {
-   	x, y := 6, 8
-   	defer func(a int) {
-   		fmt.Println("defer x, y = ", a, y) //y is closure reference
+     x, y := 6, 8
+     defer func(a int) {
+       fmt.Println("defer x, y = ", a, y) //y is closure reference
        // defer x, y = 6 108
-   	}(x)   // passing parameter
-   	x += 10
-   	y += 100
-   	fmt.Println(x, y)   // 16 108
+     }(x)   // passing parameter
+     x += 10
+     y += 100
+     fmt.Println(x, y)   // 16 108
    }
    
    ////////
    
    func main() {
-   	//call after declaration
-   	f := func(data int) {
-   		fmt.Println("closure", data)
-   	}
-   	f(6)
+     //call after declaration
+     f := func(data int) {
+       fmt.Println("closure", data)
+     }
+     f(6)
    
-   	// call directly
-   	func(data int) {
-   		fmt.Println("closure, directly", data)
-   	}(8)
+     // call directly
+     func(data int) {
+       fmt.Println("closure, directly", data)
+     }(8)
    }
    
    /////////
    
    func visitPrint(list []int, f func(int)) {  // callback function
-   	for _, value := range list {
-   		f(value)
-   	}
+     for _, value := range list {
+       f(value)
+     }
    }
    
    func main() {
-   	sli := []int{1, 6, 8}
-   	visitPrint(sli, func(value int) {
-   		fmt.Println(value)
-   	})
+     sli := []int{1, 6, 8}
+     visitPrint(sli, func(value int) {
+       fmt.Println(value)
+     })
    }
    ```
 
@@ -215,18 +215,18 @@
    var name string = "go"
    
    func myfunc() string {
-   	defer func() {
-   		name = "python"	
-   	}()
+     defer func() {
+       name = "python"	
+     }()
    
-   	fmt.Printf("name in myfunc: %s\n", name)
-   	return name	
+     fmt.Printf("name in myfunc: %s\n", name)
+     return name	
    }
    
    func main() {
-   	myname := myfunc()
-   	fmt.Printf("name in main func: %s\n", name)
-   	fmt.Printf("myname in main func: %s\n", myname)
+     myname := myfunc()
+     fmt.Printf("name in main func: %s\n", name)
+     fmt.Printf("myname in main func: %s\n", myname)
    }
    
    // name in myfunc: go
@@ -252,17 +252,17 @@
 
       ```go
       type Engine interface {
-      	Run()
-      	Stop()
+        Run()
+        Stop()
       }
       
       type Bus struct {
-      	Engine
+        Engine
       }
       
       func (c *Bus) Working() {
-      	c.Run()
-      	c.Stop()
+        c.Run()
+        c.Stop()
       }
       ```
 
