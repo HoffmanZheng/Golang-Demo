@@ -27,6 +27,7 @@ func main() {
 
 func exchange(c, d *int) {
 	d, c = c, d
+	// exchange the obj address, does not influence the original variable
 }
 
 func exchange2(c, d *int) {
@@ -34,4 +35,5 @@ func exchange2(c, d *int) {
 	//*c = *d
 	//*d = t
 	*d, *c = *c, *d
+	// exchange the value, which affect the original variable
 }

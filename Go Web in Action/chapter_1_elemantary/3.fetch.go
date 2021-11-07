@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	// fetch the web page source code of certain website
+	// go run 3.fetch.go http://www.baidu.com
 	for _, url := range os.Args[1:] {
 		resp, err := http.Get(url)
 		if err != nil {
