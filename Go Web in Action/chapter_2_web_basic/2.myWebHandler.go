@@ -4,11 +4,12 @@ import (
 	"net/http"
 )
 
-type Refer struct {
+type Refer struct {    // handler, like interceptor, works before `http.HandleFunc()`
 	handler http.Handler
 	refer   string
 }
 
+// returns only if request header with specific Referer
 func (referObj *Refer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.Referer() == referObj.refer {
 		referObj.handler.ServeHTTP(w, r)
