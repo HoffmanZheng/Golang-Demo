@@ -8,7 +8,7 @@
 
 3. MVC is a common framework in software engineering:
 
-   ![](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go%20Web%20in%20Action/images/mvc_role_diagram.png)
+   [](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go%20Web%20in%20Action/images/mvc_role_diagram.png)
 
 4. Template engine enable the separation of user interface and business data, which could generate documents in specific format.
 
