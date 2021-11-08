@@ -16,6 +16,6 @@ func main() {
 		fmt.Print("error during post: \n", err)
 	}
 	bytes, err := ioutil.ReadAll(resp.Body)
-	resp.Body.Close()
+	defer resp.Body.Close()
 	fmt.Print(bytes)
 }

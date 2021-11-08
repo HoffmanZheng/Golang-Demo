@@ -12,7 +12,7 @@ func main() {
 		fmt.Print("error during getting request: \n", err)
 	}
 	bytes, err := ioutil.ReadAll(resp.Body)
-	resp.Body.Close()
+	defer resp.Body.Close()
 	if err != nil {
 		fmt.Print("error during reading response: \n", err)
 	}
