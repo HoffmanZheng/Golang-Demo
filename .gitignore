@@ -1,5 +1,6 @@
 *.DS_Store
 .vscode
-Go\ Web\ in\ Action/.idea
-Go\ Web\ in\ Action/chapter_2_web_basic/server.crt
-Go\ Web\ in\ Action/chapter_2_web_basic/server.key
+Go_Web_in_Action/.idea
+Go_Web_in_Action/chapter_2_web_basic/server.crt
+Go_Web_in_Action/chapter_2_web_basic/server.key
+Go_Web_in_Action/.idea
