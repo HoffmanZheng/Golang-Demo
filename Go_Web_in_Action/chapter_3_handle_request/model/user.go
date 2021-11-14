@@ -16,7 +16,7 @@ type User struct {
 var DB *sql.DB
 
 func init() {
-	DB, _ = sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/chapter3")
+	DB, _ = sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/golang-demo")
 }
 
 func GetUser(uid int) (u User) {

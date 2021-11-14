@@ -14,9 +14,9 @@ type UserController struct {
 
 func (c UserController) GetUser(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	uid, _ := strconv.Atoi(query["uid"][0])
+	uid, _ := strconv.Atoi(query["uid"][0]) //  /getUser?uid=1
 
-	//此处调用模型从数据库中获取数据
+	// extract data from database
 	user := model.GetUser(uid)
 	fmt.Println(user)
 
