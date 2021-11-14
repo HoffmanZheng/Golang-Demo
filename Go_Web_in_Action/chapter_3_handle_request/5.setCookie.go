@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func setCookieTest(w http.ResponseWriter, r *http.Request) {
+func setCookie(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("test_handle")
 	fmt.Printf("cookie: %v, err: %v \n", cookie, err)
 
@@ -14,7 +14,7 @@ func setCookieTest(w http.ResponseWriter, r *http.Request) {
 		Value:  "gweoin2iehkljadhoiuh3",
 		MaxAge: 3600,
 		Domain: "localhost",
-		Path:   "/",
+		Path:   "/", // scope
 	}
 
 	http.SetCookie(w, setCookie)
@@ -22,6 +22,6 @@ func setCookieTest(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", setCookieTest)
+	http.HandleFunc("/", setCookie)
 	http.ListenAndServe(":8089", nil)
 }

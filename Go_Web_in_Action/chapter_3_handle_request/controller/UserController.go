@@ -20,7 +20,9 @@ func (c UserController) GetUser(w http.ResponseWriter, r *http.Request) {
 	user := model.GetUser(uid)
 	fmt.Println(user)
 
-	t, _ := template.ParseFiles("view/user.html")
-	userInfo := []string{user.Name, user.Phone}
-	t.Execute(w, userInfo)
+	t, err := template.ParseFiles("view/user.tmpl")
+	if err != nil {
+		fmt.Printf("error during template.ParseFiles: %v \n", err)
+	}
+	t.Execute(w, user)
 }

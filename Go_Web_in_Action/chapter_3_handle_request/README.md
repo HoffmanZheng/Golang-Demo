@@ -2,7 +2,7 @@
 
 ### Receive Web Requests
 
-1. Serve Multiplexer receives web requests and forwards them to the corresponding handlers. Database interactions would take place if necessary. The response would be rendered by template engine, the whole process is display as below:
+1. Serve Multiplexer receives web requests and forwards them to the corresponding handlers. Database interactions would take place if necessary. The response would be rendered by template engine, the whole process is display as below: (also see: [4.webServer.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/4.webServer.go). )
 
    ![ServerMux](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/images/ServerMux.jpeg)
 
@@ -15,3 +15,9 @@
 5. Custom handler is more flexible and powerful, but it's a little tedious to define a new struct for each handler, see: [1.useDefaultServeMux.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/1.useDefaultServeMux.go). HandlerFunc could be defined and registered individualy by `HandleFunc()`, see: [2.customisedServeMux.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/2.customisedServeMux.go). 
 
 ### Handle Web Requests
+
+1. The messages of http Request could be parsed in `net/http/Request.go`, including method, URI, Header, Form, etc. `response` struct is private in `net/http/Server.go`, which could only be accessed by `ResponseWriter`.
+
+2. Cookie is commonly used to maintain the session info between client and server, which could be initialized and set conveniently, see: [5.setCookie.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/5.setCookie.go). 
+
+3. Method to implement session is not provided in Golang library,
