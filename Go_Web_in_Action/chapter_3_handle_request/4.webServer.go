@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	controller "github.com/HoffmanZheng/Golang-Demo/blob/master/Go%20Web%20in%20Action/chapter_3_handle_request/controller"
+	controller "github.com/HoffmanZheng/Golang-Demo/Go_Web_in_Action/chapter_3_handle_request/controller"
 )
 
 func main() {

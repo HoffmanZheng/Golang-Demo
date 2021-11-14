@@ -6,13 +6,13 @@ import (
 	"net/http"
 	"strconv"
 
-	model "github.com/HoffmanZheng/Golang-Demo/blob/master/Go%20Web%20in%20Action/chapter_3_handle_request/model"
+	model "github.com/HoffmanZheng/Golang-Demo/Go_Web_in_Action/chapter_3_handle_request/model"
 )
 
 type UserController struct {
 }
 
-func (c UserController) GetUser(w http.ResponseWriter, r *http.Request)  {
+func (c UserController) GetUser(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	uid, _ := strconv.Atoi(query["uid"][0])
 
