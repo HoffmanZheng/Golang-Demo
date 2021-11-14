@@ -21,8 +21,9 @@ var myDB *sql.DB
 var user MyUser
 
 func init() {
-	myDB, _ = sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/wxshop")
-	err := myDB.Ping() // attempt to connect database
+	// create DB instance
+	myDB, _ = sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/golang-demo")
+	err := myDB.Ping() // connect and verify the database connection
 	if err != nil {
 		fmt.Printf("error during db ping: %v \n", err)
 	}
@@ -59,7 +60,7 @@ func insertRow() {
 	if err != nil {
 		fmt.Printf("error during insertRow, err: %v", err)
 	}
-	id, err := res.LastInsertId()
+	id, err := res.LastInsertId() // get the last id which is just inserted
 	if err != nil {
 		fmt.Printf("error during getLasetInsertId, err: %v", err)
 	}

@@ -19,5 +19,3 @@
 1. The messages of http Request could be parsed in `net/http/Request.go`, including method, URI, Header, Form, etc. `response` struct is private in `net/http/Server.go`, which could only be accessed by `ResponseWriter`.
 
 2. Cookie is commonly used to maintain the session info between client and server, which could be initialized and set conveniently, see: [5.setCookie.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/5.setCookie.go). 
-
-3. Method to implement session is not provided in Golang library,
