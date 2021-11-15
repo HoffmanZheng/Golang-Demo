@@ -23,8 +23,8 @@ var o orm.Ormer
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	orm.RegisterDataBase("default", "mysql",
-		"root:123456@tcp(127.0.0.1:3306)/wxshop?charset=utf8")
-	orm.RegisterModelWithPrefix("tb_", new(User))
+		"root:123456@tcp(127.0.0.1:3306)/golang-demo?charset=utf8")
+	orm.RegisterModelWithPrefix("tb_", new(User)) // table name: tb_user
 	fmt.Println("beego orm init finished!")
 	o = orm.NewOrm()
 }
@@ -65,7 +65,7 @@ func updateUser() {
 }
 
 func main() {
+	insertNewUser()
 	getUserById(1)
-	// insertNewUser()
 	updateUser()
 }

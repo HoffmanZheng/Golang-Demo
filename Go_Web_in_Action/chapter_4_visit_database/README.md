@@ -11,3 +11,7 @@
 4. A prepared statement could be fulfilled by using `*DB.prepare()`, which could save compilation cost and avoid SQL injection. Database transaction could be implemented by `*DB.Begin()`, `*Tx.rollback()` and `*Tx.Commit()`.
 
 ### Common ORM library in Golang
+
+1. ORM makes a mapping between the relational database and the object, which acts as a bridge between the business logic layer and the database layer.
+
+2. Sample of gorm, see: [2.gormSample.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_4_visit_database/2.gormSample.go); sample of beegoORM, see: [3.beegoORM.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_4_visit_database/3.beegoORM.go)
