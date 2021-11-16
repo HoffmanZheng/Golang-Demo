@@ -63,7 +63,7 @@ func handlerConn(c net.Conn) {
 			if conn == c { // current conn already been processed
 				continue
 			}
-			if heart.expireTime < time.Now().Unix() {
+			if heart.expireTime < time.Now().Unix() { // expired
 				delete(ConnSlice, conn)
 				conn.Close()
 				fmt.Printf("delete conn: %v \n", conn.RemoteAddr())

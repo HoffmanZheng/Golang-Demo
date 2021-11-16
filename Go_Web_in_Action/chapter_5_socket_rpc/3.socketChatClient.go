@@ -23,7 +23,7 @@ func ChatClient() net.Conn {
 func Sender(conn net.Conn) {
 	defer conn.Close()
 	reader := bufio.NewReader(os.Stdin)
-	go func() { // ??? function must be invoked in go statement
+	go func() { // send heartbeat in another go routine
 		t := time.NewTicker(time.Second * 1)
 		defer t.Stop()
 		for {
