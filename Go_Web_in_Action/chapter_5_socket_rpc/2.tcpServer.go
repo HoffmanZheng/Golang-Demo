@@ -19,7 +19,7 @@ func Server() {
 			fmt.Printf("error during accepting connection, err: %v \n", err)
 		}
 		fmt.Printf("connect from client: %v, ip: %v \n", conn, conn.RemoteAddr())
-		go handleConnection(conn)
+		go handleConnection(conn)   // open go routine for each connection
 	}
 }
 
