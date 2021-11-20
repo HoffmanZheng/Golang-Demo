@@ -40,19 +40,19 @@ func main() {
 		ch2 <- "two"
 	}()
 
-	go func() {
-		time.Sleep(5)
+	go func() { // set a timeout
+		time.Sleep(5000)
 		timeout <- true
 	}()
 
-	for i := 0; i < 2; i++ {
+	for i := 0; i < 3; i++ {
 		select {
 		case msg1 := <-ch1:
-			fmt.Printf("receive from ch1, %s \n", msg1)
+			fmt.Printf("%d receive from ch1, %s \n", i, msg1)
 		case msg2 := <-ch2:
-			fmt.Printf("receive from ch2, %s \n", msg2)
-		case <-timeout:
-			fmt.Println("timeout...")
+			fmt.Printf("%d receive from ch2, %s \n", i, msg2)
+		case msg3 := <-timeout:
+			fmt.Printf("%d timeout...%v \n", i, msg3)
 		}
 	}
 }

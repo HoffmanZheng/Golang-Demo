@@ -21,6 +21,6 @@ func (t *T) MethodName(argType T1, replyType *T2) error
 
 ### Go Microservice
 
-1. Microservice architecture is an evolution of SOA(Service-Oriented Architecture), which devide single application into several microservices. Microservice should obey single responsibility and service-oriented principle, encapsulate functions and provide services.
+1. Microservice architecture is an evolution of SOA(Service-Oriented Architecture), which devides single application into several microservices. Microservice should obey single responsibility and service-oriented principle, encapsulate functions and provide services.
 
 2. gRPC is a open-source, cross-platform, high performance RPC framework, it makes it easier to call a remote service just like call local method. It's easier to establish distributed serives by using gRPC, demo of gRPC, see: [7.gRpcClient.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_5_socket_rpc/7.gRpcClient.go) and [8.gRpcServer.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_5_socket_rpc/8.gRpcServer.go)
