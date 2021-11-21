@@ -13,6 +13,7 @@ var wait = sync.WaitGroup{}
 
 func main() {
 	for i := 0; i < 30; i++ {
+		wait.Add(1)
 		if i%7 == 0 {
 			go write(i)
 		} else {
@@ -25,7 +26,6 @@ func main() {
 
 func read(i int) {
 	fmt.Printf("goroutine %d, reading start... \n", i)
-	wait.Add(1)
 	rwMutex.RLock()
 	fmt.Printf("goroutine %d, reading result: %d \n", i, randomNum)
 	time.Sleep(time.Second)
@@ -36,7 +36,6 @@ func read(i int) {
 
 func write(i int) {
 	fmt.Printf("goroutine %d, writing start... \n", i)
-	wait.Add(1)
 	rwMutex.Lock()
 	v := rand.Intn(10)
 	randomNum = v

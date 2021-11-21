@@ -22,4 +22,16 @@
 
 ### Concurrency Impremented using `sync` Package
 
+1. Race conditions often cause unexpected problems in concurrent requests due to their non-atomic behavior. In order to avoid race conditions, Golang provides some solutions, such as channel blocking, mutual exclusion locks, etc.
+
+2. Once `sync.Mutex` is obtained by a goroutine, other goroutine could only wait until the Mutex is released. Otherwise leads to a deadlock. See: [2.syncMutex.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/2.syncMutex.go)
+
+3. A `sync.RWMutex` is usually used in an application scenarios where read more and write less, see: [3.syncRWMutex.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/2.syncRWMutex.go)
+
+4. `sync.Once` is used to ensure that the function is only been called once, like close the channel, see: [4.syncOnce.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/4.syncOnce.go)
+
+5. A race detector could help find the potential concurrency issues, run `go run -race main.go`
+
 ### Go Concurrency Demo
+
+1. Use the sieve method to obtain prime numbers, see: [5.primeNumFilter.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/5.primeNumFilter.go)

@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-// 保证只执行以此和并发安全
+// 保证只执行一次和并发安全
 
 var wait = sync.WaitGroup{}
 var once = sync.Once{}
@@ -40,5 +40,5 @@ func func2(ch1 <-chan int, ch2 chan<- int) {
 		}
 		ch2 <- 2 * i
 	}
-	once.Do(func() { close(ch2) })
+	once.Do(func() { close(ch2) }) // close a closed channel cause error
 }

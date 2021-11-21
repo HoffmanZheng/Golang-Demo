@@ -6,16 +6,14 @@ import (
 	"time"
 )
 
-/** sync.Mutex 在同一个 goroutine 中对解锁前的 Mutex 再次加锁会造成死锁 */
-
 func main() {
 	var mutex sync.Mutex
-	wait := sync.WaitGroup{}
+	wait := sync.WaitGroup{} // like countdownLatch in Java
 	mutex.Lock()
 	fmt.Println("lock in main thread")
 	for i := 0; i < 5; i++ {
+		wait.Add(1)
 		go func(i int) {
-			wait.Add(1)
 			fmt.Printf("before lock, i: %d \n", i)
 			mutex.Lock()
 			fmt.Printf("lock, i: %d \n", i)
