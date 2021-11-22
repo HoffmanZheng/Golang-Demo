@@ -26,7 +26,7 @@
 
 2. Once `sync.Mutex` is obtained by a goroutine, other goroutine could only wait until the Mutex is released. Otherwise leads to a deadlock. See: [2.syncMutex.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/2.syncMutex.go)
 
-3. A `sync.RWMutex` is usually used in an application scenarios where read more and write less, see: [3.syncRWMutex.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/2.syncRWMutex.go)
+3. A `sync.RWMutex` is usually used in an application scenarios where read more and write less, see: [3.syncRWMutex.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/3.syncRWMutex.go)
 
 4. `sync.Once` is used to ensure that the function is only been called once, like close the channel, see: [4.syncOnce.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_7_go_concurrency/4.syncOnce.go)
 
