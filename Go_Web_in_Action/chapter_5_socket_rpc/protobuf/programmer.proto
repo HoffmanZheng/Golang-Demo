@@ -1,4 +1,5 @@
 // 指定语法格式，注意 proto3 不再支持 proto2 的 required 和 optional
+// 生成 proto 对应的 go　文件：protoc --go_out=plugins=grpc:. ./programmer.proto
 syntax = "proto3";
 package proto;  // 指定生成包的名称为 programmer.pb.go，防止命名错误
 option go_package="./";  // 编译为 .go 文件最好指定的参数
