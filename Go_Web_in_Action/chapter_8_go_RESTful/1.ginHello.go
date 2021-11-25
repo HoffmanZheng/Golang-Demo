@@ -16,5 +16,5 @@ func main() {
 func goLogin(c *gin.Context) {
 	name := c.PostForm("name")
 	password := c.PostForm("password")
-	c.String(200, "username=%s, password+%s", name, password)
+	c.String(200, "username=%s, password=%s", name, password)
 }
