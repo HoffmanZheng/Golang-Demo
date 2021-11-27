@@ -10,13 +10,28 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+type MyUser struct {
+	Id         int       `gorm:"column:id"`
+	Name       string    `gorm:"column:name"`
+	Tel        string    `gorm:"column:tel"`
+	AvatarUrl  string    `gorm:"column:avatar_url"`
+	Address    string    `gorm:"column:address"`
+	CreatedAt  time.Time `gorm:"column:created_at"`
+	ModifiedAt time.Time `gorm:"column:modified_at"`
+}
+
+var (
+	db            *gorm.DB
+	sqlConnection = "root:123456@tcp(127.0.0.1:3306)/wxshop?charset=utf8&parseTime=true"
+)
+
 func init() {
 	var err error
 	db, err = gorm.Open("mysql", sqlConnection)
 	if err != nil {
 		fmt.Printf("error during open sqlConnection, err: %v \n", err)
 	}
-	db.AutoMigrate(&User{})
+	db.AutoMigrate(&MyUser{})
 }
 
 func main() {
@@ -30,27 +45,12 @@ func main() {
 	engine.Run()
 }
 
-var (
-	db            *gorm.DB
-	sqlConnection = "root:123456@tcp(127.0.0.1:3306)/wxshop?charset=utf8&parseTime=true"
-)
-
-type User struct {
-	Id         int       `gorm:"column:id"`
-	Name       string    `gorm:"column:name"`
-	Tel        string    `gorm:"column:tel"`
-	AvatarUrl  string    `gorm:"column:avatar_url"`
-	Address    string    `gorm:"column:address"`
-	CreatedAt  time.Time `gorm:"column:created_at"`
-	ModifiedAt time.Time `gorm:"column:modified_at"`
-}
-
-func (u *User) TableName() string {
+func (u *MyUser) TableName() string {
 	return "tb_user"
 }
 
 func getAllUser(c *gin.Context) {
-	var users []User
+	var users []MyUser
 	db.Find(&users)
 	if len(users) <= 0 {
 		c.JSON(http.StatusNotFound, gin.H{
@@ -68,7 +68,7 @@ func getAllUser(c *gin.Context) {
 }
 
 func getUserById(c *gin.Context) {
-	var user User
+	var user MyUser
 	id := c.Param("id")
 	db.First(&user, id)
 
@@ -91,13 +91,13 @@ func createUser(c *gin.Context) {
 	avatalUrl := c.PostForm("avatalUrl")
 	address := c.PostForm("address")
 	fmt.Printf("name: %s, tel: %s. avatalUrl: %s, address: %s", name, tel, avatalUrl, address)
-	user := User{Name: name, Tel: tel, AvatarUrl: avatalUrl, Address: address, CreatedAt: time.Now(), ModifiedAt: time.Now()}
+	user := MyUser{Name: name, Tel: tel, AvatarUrl: avatalUrl, Address: address, CreatedAt: time.Now(), ModifiedAt: time.Now()}
 	db.Save(&user)
 	c.JSON(201, user)
 }
 
 func deleteUserById(c *gin.Context) {
-	var user User
+	var user MyUser
 	id := c.Param("id")
 	db.First(&user, id)
 
@@ -117,7 +117,7 @@ func deleteUserById(c *gin.Context) {
 }
 
 func updateUserById(c *gin.Context) {
-	var user User
+	var user MyUser
 	id := c.Param("id")
 	db.First(&user, id)
 
