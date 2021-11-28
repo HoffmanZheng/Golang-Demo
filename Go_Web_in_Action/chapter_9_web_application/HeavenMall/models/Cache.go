@@ -1,6 +1,7 @@
 package models
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
@@ -45,16 +46,16 @@ type cacheDb struct{}
 
 var CacheDb = &cacheDb{}
 
-func (c cacheDb) Set(key string, value interface{}) {
+func (c cacheDb) Set(ctx context.Context, key string, value interface{}) {
 	if enableRedis {
 		bytes, _ := json.Marshal(value)
-		redisClient.Put(key, string(bytes), time.Second*time.Duration(redisTime))
+		redisClient.Put(ctx, key, string(bytes), time.Second*time.Duration(redisTime))
 	}
 }
 
-func (c cacheDb) Get(key string, obj interface{}) bool {
+func (c cacheDb) Get(ctx context.Context, key string, obj interface{}) bool {
 	if enableRedis {
-		if redisStr := redisClient.Get(key); redisStr != nil {
+		if redisStr, err := redisClient.Get(ctx, key); err != nil {
 			fmt.Println("read data from redis ...")
 			redisValue, ok := redisStr.([]uint8)
 			if !ok {

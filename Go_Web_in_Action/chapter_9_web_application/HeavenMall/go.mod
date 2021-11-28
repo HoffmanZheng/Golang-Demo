@@ -12,6 +12,7 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/gomarkdown/markdown v0.0.0-20211105120026-16f708f914c3 // indirect
+	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hunterhug/go_image v1.0.1 // indirect
 	github.com/jinzhu/gorm v1.9.16 // indirect
