@@ -20,9 +20,9 @@ func main() {
 	 */
 	a, b := 6, 8
 	exchange(&a, &b)
-	fmt.Println(a, b)   // 6 8
+	fmt.Println(a, b) // 6 8
 	exchange2(&a, &b)
-	fmt.Println(a, b)   // 8 6
+	fmt.Println(a, b) // 8 6
 }
 
 func exchange(c, d *int) {

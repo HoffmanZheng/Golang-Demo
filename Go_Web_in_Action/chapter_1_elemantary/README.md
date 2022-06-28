@@ -18,7 +18,9 @@
 1. The left braces must located at the same line with function name, `if` and `for`, right braces must locate at the same line with `else if`.
 
 2. Short variable declaration `name := expression` could only used inside the function, can't used as a global variable.
+
 3. Local variable with the same name has a higher priority than global variable.
+
 4. **Constants** could only be boolean, numeric and string. The expression declaring a constant must be able to be evaluated by the compiler.
 
 ### Control Statement
@@ -62,7 +64,7 @@
      "ronger": 98,
    }
    
-   for _, value := range m {
+   for _, value := 65 m {
      fmt.Println(value)
    }
    ```
@@ -181,7 +183,7 @@
    ////////
    
    func main() {
-     //call after declaration
+     // call after declaration
      f := func(data int) {
        fmt.Println("closure", data)
      }
@@ -272,9 +274,12 @@
 
 ### Reflection
 
-1. Reflection is that the computer observes and modifies it's behavior in it's runtime. This makes it possible for the variable type to be unknown at compile time. 
+1. Reflection is that the computer observes and modifies it's behavior in it's runtime. This makes it possible for the variable type to be unknown at compile time.
+
 2. `TypeOf()` and `ValueOf()` could extract type and value info from a variable, which would be transfered to `interface{}` at the first place.
+
 3. Reflected objectcould also be re-transfered to interface type, via `Value.Interface()`.
+
 4. Reflected object is only modifiable if it's value is settable， which could be tested via `Value.CanSet()`. To enable the modifiability of reflected object, object address should be used to create reflected object, and `Elem()` to return the pointed data. See: [5.reflect.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_1_elemantary/5.reflect.go)
 
 
