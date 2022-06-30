@@ -15,6 +15,7 @@
 2. A json format RPC could be impremented by using `net/rpc/jsonrpc`, see: [5.jsonRpcClient.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_5_socket_rpc/5.jsonRpcClient.go) and [6.jsonRpcServer.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_5_socket_rpc/6.jsonRpcServer.go)
 
 3. A serve object should be defined and registered in rpc `rpc.Register(serveObj)`, the format of rpc method looks like as below:
+
 ```golang
 func (t *T) MethodName(argType T1, replyType *T2) error
 ```

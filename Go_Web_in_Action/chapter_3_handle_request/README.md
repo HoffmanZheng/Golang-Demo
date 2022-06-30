@@ -12,10 +12,10 @@
 
 4. One restriction of ServeMux is: it can not match the URL pattern. `HttpRouter` could make up for that shortcommings, see: [3.httpRouter.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/3.httpRouter.go)
 
-5. Custom handler is more flexible and powerful, but it's a little tedious to define a new struct for each handler, see: [1.useDefaultServeMux.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/1.useDefaultServeMux.go). HandlerFunc could be defined and registered individualy by `HandleFunc()`, see: [2.customisedServeMux.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/2.customisedServeMux.go). 
+5. Custom handler is more flexible and powerful, but it's a little tedious to define a new struct for each handler, see: [1.useDefaultServeMux.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/1.useDefaultServeMux.go). HandlerFunc could be defined and registered individualy by `HandleFunc()`, see: [2.customisedServeMux.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/2.customisedServeMux.go).
 
 ### Handle Web Requests
 
 1. The messages of http Request could be parsed in `net/http/Request.go`, including method, URI, Header, Form, etc. `response` struct is private in `net/http/Server.go`, which could only be accessed by `ResponseWriter`.
 
-2. Cookie is commonly used to maintain the session info between client and server, which could be initialized and set conveniently, see: [5.setCookie.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/5.setCookie.go). 
+2. Cookie is commonly used to maintain the session info between client and server, which could be initialized and set conveniently, see: [5.setCookie.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Web_in_Action/chapter_3_handle_request/5.setCookie.go).

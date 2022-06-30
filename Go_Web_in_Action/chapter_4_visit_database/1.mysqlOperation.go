@@ -102,7 +102,7 @@ func preparedQuery() {
 func main() {
 	queryUserById(1)
 	queryMultiRows()
-	// insertRow()  // unique key produce duplicate entry exception
+	insertRow() // unique key produce duplicate entry exception
 	updateRow()
 	preparedQuery()
 	defer myDB.Close()
