@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	pb "github.com/NervousOrange/Golang-demo/src/chapter_5_socket_rpc/protobuf"
+	pb "github.com/HoffmanZheng/Golang-Demo/Go_Web_in_Action/chapter_5_socket_rpc/protobuf"
 	"google.golang.org/grpc"
 )
 

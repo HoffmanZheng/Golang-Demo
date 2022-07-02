@@ -41,7 +41,7 @@ func main() {
 	}()
 
 	go func() { // set a timeout
-		time.Sleep(5000)
+		time.Sleep(5 * time.Second)
 		timeout <- true
 	}()
 

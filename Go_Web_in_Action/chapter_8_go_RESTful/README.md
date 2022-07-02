@@ -6,9 +6,10 @@
 
 ### Usage of Beego framework
 
-1. Beego is a high-performance HTTP framework developed by Golang, which is commonly used to develop API, web application, backend service, etc. 
+1. Beego is a high-performance HTTP framework developed by Golang, which is commonly used to develop API, web application, backend service, etc.
 
 2. A Beego project could easily be initiaized by using bee command-line tool, as below:
+
 ```powershell
 go get github.com/beego/beego
 go get github.com/beego/bee
