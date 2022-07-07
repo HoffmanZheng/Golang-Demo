@@ -12,17 +12,24 @@ import (
 	"strings"
 	"time"
 
-	"github.com/beego/beego/v2/core/logs"
-	"github.com/beego/beego/v2/server/web"
+	"github.com/astaxie/beego/core/logs"
+	"github.com/astaxie/beego/server/web"
 	"github.com/gomarkdown/markdown"
-	"github.com/hunterhug/go_image"
 )
+
+//  "github.com/hunterhug/go_image"
 
 var logger = logs.GetBeeLogger()
 
 func TimestampToDate(timestamp int) string {
 	t := time.Unix(int64(timestamp), 0)
 	return t.Format("2006-01-02 15:04:05")
+}
+
+//获取当前时间戳
+func GetUnix() int64 {
+	fmt.Println(time.Now().Unix())
+	return time.Now().Unix()
 }
 
 func GetCurrentUnix() int64 {
@@ -56,6 +63,12 @@ func VerifyEmail(email string) bool {
 	return reg.MatchString(email)
 }
 
+//获取日期
+func FormatDay() string {
+	template := "20060102"
+	return time.Now().Format(template)
+}
+
 func GenerateOrderId() string {
 	template := "200601021504"
 	return time.Now().Format(template) + GetRandomNum()
@@ -74,10 +87,11 @@ func ResizeImage(filename string) {
 		w := resizeImage[i]
 		width, _ := strconv.Atoi(w)
 		savepath := filename + "_" + w + "x" + w + extName
-		err := go_image.ThumbnailF2F(filename, savepath, width, width)
-		if err != nil {
-			logger.Error("error", err)
-		}
+		fmt.Println("ThumbnailF2F image file: ", width, savepath)
+		// err := go_image.ThumbnailF2F(filename, savepath, width, width)
+		// if err != nil {
+		// 	logger.Error("error", err)
+		// }
 	}
 }
 

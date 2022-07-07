@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strings"
 
-	beego "github.com/beego/beego/v2/server/web"
+	beego "github.com/astaxie/beego/server/web"
 	"github.com/jinzhu/gorm"
 )
 

@@ -1,8 +1,8 @@
 package models
 
 import (
-	"github.com/beego/beego/v2/core/logs"
-	"github.com/beego/beego/v2/server/web"
+	"github.com/astaxie/beego/core/logs"
+	"github.com/astaxie/beego/server/web"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

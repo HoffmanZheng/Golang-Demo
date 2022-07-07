@@ -1,14 +1,12 @@
 package main
 
 import (
-	_ "HeavenMall/routers"
-	// "github.com/HoffmanZheng/Golang-Demo/Go_Web_in_Action/chapter_9_web_application/HeavenMall/common"
-	// "github.com/HoffmanZheng/Golang-Demo/Go_Web_in_Action/chapter_9_web_application/HeavenMall/models"
 	"HeavenMall/common"
 	"HeavenMall/models"
+	_ "HeavenMall/routers"
 
-	beego "github.com/beego/beego/v2/server/web"
-	"github.com/beego/beego/v2/server/web/filter/cors"
+	beego "github.com/astaxie/beego/server/web"
+	"github.com/astaxie/beego/server/web/filter/cors"
 )
 
 func main() {

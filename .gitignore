@@ -3,3 +3,4 @@
 Go_Web_in_Action/chapter_2_web_basic/server.crt
 Go_Web_in_Action/chapter_2_web_basic/server.key
 **/.idea
+**/vendor

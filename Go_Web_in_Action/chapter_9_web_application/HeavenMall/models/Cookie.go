@@ -3,8 +3,8 @@ package models
 import (
 	"encoding/json"
 
-	beego "github.com/beego/beego/v2/server/web"
-	"github.com/beego/beego/v2/server/web/context"
+	beego "github.com/astaxie/beego/server/web"
+	"github.com/astaxie/beego/server/web/context"
 )
 
 //定义结构体  缓存结构体 私有

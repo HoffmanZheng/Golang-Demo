@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/beego/beego/v2/client/cache"
-	_ "github.com/beego/beego/v2/client/cache/redis"
-	"github.com/beego/beego/v2/core/logs"
-	"github.com/beego/beego/v2/server/web"
+	"github.com/astaxie/beego/client/cache"
+	_ "github.com/astaxie/beego/client/cache/redis"
+	"github.com/astaxie/beego/core/logs"
+	"github.com/astaxie/beego/server/web"
 )
 
 var redisClient cache.Cache

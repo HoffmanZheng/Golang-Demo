@@ -7,11 +7,11 @@ import (
 	"runtime"
 	"path/filepath"
 
-    "github.com/beego/beego/v2/core/logs"
+    "github.com/astaxie/beego/core/logs"
 
 	_ "HeavenMall/routers"
 
-	beego "github.com/beego/beego/v2/server/web"
+	beego "github.com/astaxie/beego/server/web"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
