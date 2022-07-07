@@ -17,7 +17,7 @@ func (c *CheckoutController) Checkout() {
 	//1.获取要结算的商品
 	cartList := []models.Cart{}
 	orderList := []models.Cart{} //要结算的商品
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 
 	var allPrice float64
 	//2.执行计算总价
@@ -38,7 +38,7 @@ func (c *CheckoutController) Checkout() {
 
 	//3.获取收货地址
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	addressList := []models.Address{}
 	models.DB.Where("uid=?", user.Id).Order("default_address desc").Find(&addressList)
 	c.Data["addressList"] = addressList
@@ -70,7 +70,7 @@ func (c *CheckoutController) GoOrder() {
 
 	// 1、获取收货地址信息
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 
 	addressResult := []models.Address{}
 	models.DB.Where("uid=? AND default_address=1", user.Id).Find(&addressResult)
@@ -80,7 +80,7 @@ func (c *CheckoutController) GoOrder() {
 		// 2、获取购买商品的信息   orderList就是要购买的商品信息
 		cartList := []models.Cart{}
 		orderList := []models.Cart{} //要结算的商品
-		models.Cookie.Get(c.Ctx, "cartList", &cartList)
+		models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 		var allPrice float64
 		for i := 0; i < len(cartList); i++ {
 			if cartList[i].Checked {
@@ -131,7 +131,7 @@ func (c *CheckoutController) GoOrder() {
 					noSelectedCartList = append(noSelectedCartList, cartList[i])
 				}
 			}
-			models.Cookie.Set(c.Ctx, "cartList", noSelectedCartList)
+			models.Cookie{}.Set(c.Ctx, "cartList", noSelectedCartList)
 			c.Redirect("/buy/confirm?id="+strconv.Itoa(order.Id), 302)
 
 		} else {
@@ -155,7 +155,7 @@ func (c *CheckoutController) Confirm() {
 	}
 	//获取用户信息
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 
 	//获取主订单信息
 	order := models.Order{}
@@ -192,7 +192,7 @@ func (c *CheckoutController) OrderPayStatus() {
 	models.DB.Where("id=?", id).Find(&order)
 
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	//3、判断当前数据是否合法
 	if user.Id != order.Uid {
 		c.Data["json"] = map[string]interface{}{

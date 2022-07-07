@@ -5,8 +5,8 @@ import (
 	"HeavenMall/models"
 	_ "HeavenMall/routers"
 
-	beego "github.com/astaxie/beego/server/web"
-	"github.com/astaxie/beego/server/web/filter/cors"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/plugins/cors"
 )
 
 func main() {

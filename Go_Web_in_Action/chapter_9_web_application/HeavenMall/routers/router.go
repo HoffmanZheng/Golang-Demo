@@ -4,7 +4,7 @@ import (
 	"HeavenMall/controllers"
 	"HeavenMall/controllers/frontend"
 
-	beego "github.com/astaxie/beego/server/web"
+	beego "github.com/astaxie/beego"
 )
 
 func init() {

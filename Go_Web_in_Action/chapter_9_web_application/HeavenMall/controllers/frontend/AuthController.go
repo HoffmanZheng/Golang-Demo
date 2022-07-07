@@ -35,7 +35,7 @@ func (c *AuthController) GoLogin() {
 	user := []models.User{}
 	models.DB.Where("phone=? AND password=?", phone, password).Find(&user)
 	if len(user) > 0 {
-		models.Cookie.Set(c.Ctx, "userinfo", user[0])
+		models.Cookie{}.Set(c.Ctx, "userinfo", user[0])
 		c.Data["json"] = map[string]interface{}{
 			"success": true,
 			"msg":     "用户登陆成功",
@@ -54,7 +54,7 @@ func (c *AuthController) GoLogin() {
 
 //退出登陆
 func (c *AuthController) LoginOut() {
-	models.Cookie.Remove(c.Ctx, "userinfo", "")
+	models.Cookie{}.Remove(c.Ctx, "userinfo", "")
 	c.Redirect(c.Ctx.Request.Referer(), 302)
 }
 
@@ -295,7 +295,7 @@ func (c *AuthController) GoRegister() {
 		}
 		models.DB.Create(&user)
 
-		models.Cookie.Set(c.Ctx, "userinfo", user)
+		models.Cookie{}.Set(c.Ctx, "userinfo", user)
 		c.Redirect("/", 302)
 	} else {
 		c.Redirect("/auth/registerStep1", 302)

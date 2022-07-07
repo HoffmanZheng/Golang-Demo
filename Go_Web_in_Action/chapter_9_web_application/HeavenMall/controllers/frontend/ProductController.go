@@ -125,7 +125,7 @@ func (c *ProductController) Collect() {
 		return
 	}
 	user := models.User{}
-	ok := models.Cookie.Get(c.Ctx, "userinfo", &user)
+	ok := models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	if ok != true {
 		c.Data["json"] = map[string]interface{}{
 			"success": false,

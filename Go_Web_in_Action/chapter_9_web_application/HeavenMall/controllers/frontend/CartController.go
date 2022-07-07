@@ -14,7 +14,7 @@ type CartController struct {
 func (c *CartController) Get() {
 	c.BaseInit()
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 
 	var allPrice float64
 	//执行计算总价
@@ -60,7 +60,7 @@ func (c *CartController) AddCart() {
 
 	//2.判断购物车有没有数据（cookie）
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 	if len(cartList) > 0 { //购物车有数据
 		//4、判断购物车有没有当前数据
 		if models.CartHasData(cartList, currentData) {
@@ -72,12 +72,12 @@ func (c *CartController) AddCart() {
 		} else {
 			cartList = append(cartList, currentData)
 		}
-		models.Cookie.Set(c.Ctx, "cartList", cartList)
+		models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 
 	} else {
 		//3.如果购物车没有任何数据，直接把当前数据写入cookie
 		cartList = append(cartList, currentData)
-		models.Cookie.Set(c.Ctx, "cartList", cartList)
+		models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 	}
 
 	c.Data["product"] = product
@@ -95,7 +95,7 @@ func (c *CartController) DecCart() {
 	productAttr := ""
 
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 	for i := 0; i < len(cartList); i++ {
 		if cartList[i].Id == productId && cartList[i].ProductColor == productColor && cartList[i].ProductAttr == productAttr {
 			if cartList[i].Num > 1 {
@@ -111,7 +111,7 @@ func (c *CartController) DecCart() {
 	}
 
 	if flag {
-		models.Cookie.Set(c.Ctx, "cartList", cartList)
+		models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 		c.Data["json"] = map[string]interface{}{
 			"success":         true,
 			"message":         "修改数量成功",
@@ -140,7 +140,7 @@ func (c *CartController) IncCart() {
 	productAttr := ""
 
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 	for i := 0; i < len(cartList); i++ {
 		if cartList[i].Id == productId && cartList[i].ProductColor == productColor && cartList[i].ProductAttr == productAttr {
 			cartList[i].Num = cartList[i].Num + 1
@@ -154,7 +154,7 @@ func (c *CartController) IncCart() {
 	}
 
 	if flag {
-		models.Cookie.Set(c.Ctx, "cartList", cartList)
+		models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 		c.Data["json"] = map[string]interface{}{
 			"success":         true,
 			"message":         "修改数量成功",
@@ -180,7 +180,7 @@ func (c *CartController) ChangeOneCart() {
 	productAttr := ""
 
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 
 	for i := 0; i < len(cartList); i++ {
 		if cartList[i].Id == productId && cartList[i].ProductColor == productColor && cartList[i].ProductAttr == productAttr {
@@ -193,7 +193,7 @@ func (c *CartController) ChangeOneCart() {
 	}
 
 	if flag {
-		models.Cookie.Set(c.Ctx, "cartList", cartList)
+		models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 		c.Data["json"] = map[string]interface{}{
 			"success":  true,
 			"message":  "修改状态成功",
@@ -214,7 +214,7 @@ func (c *CartController) ChangeAllCart() {
 	flag, _ := c.GetInt("flag")
 	var allPrice float64
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 	for i := 0; i < len(cartList); i++ {
 		if flag == 1 {
 			cartList[i].Checked = true
@@ -226,7 +226,7 @@ func (c *CartController) ChangeAllCart() {
 			allPrice += cartList[i].Price * float64(cartList[i].Num)
 		}
 	}
-	models.Cookie.Set(c.Ctx, "cartList", cartList)
+	models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 
 	c.Data["json"] = map[string]interface{}{
 		"success":  true,
@@ -241,14 +241,14 @@ func (c *CartController) DelCart() {
 	productAttr := ""
 
 	cartList := []models.Cart{}
-	models.Cookie.Get(c.Ctx, "cartList", &cartList)
+	models.Cookie{}.Get(c.Ctx, "cartList", &cartList)
 	for i := 0; i < len(cartList); i++ {
 		if cartList[i].Id == productId && cartList[i].ProductColor == productColor && cartList[i].ProductAttr == productAttr {
 			//执行删除
 			cartList = append(cartList[:i], cartList[(i + 1):]...)
 		}
 	}
-	models.Cookie.Set(c.Ctx, "cartList", cartList)
+	models.Cookie{}.Set(c.Ctx, "cartList", cartList)
 
 	c.Redirect("/cart", 302)
 }

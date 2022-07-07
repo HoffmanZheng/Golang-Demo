@@ -17,7 +17,7 @@ type UserController struct {
 func (c *UserController) Get() {
 	c.BaseInit()
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	c.Data["user"] = user
 	time := time.Now().Hour()
 	if time >= 12 && time <= 18 {
@@ -48,7 +48,7 @@ func (c *UserController) OrderList() {
 	c.BaseInit()
 	//1、获取当前用户
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	//2、获取当前用户下面的订单信息 并分页
 
 	page, _ := c.GetInt("page")
@@ -96,7 +96,7 @@ func (c *UserController) OrderInfo() {
 	c.BaseInit()
 	id, _ := c.GetInt("id")
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	order := models.Order{}
 	models.DB.Where("id=? AND uid=?", id, user.Id).Preload("OrderItem").Find(&order)
 	c.Data["order"] = order
@@ -130,7 +130,7 @@ func (c *UserController) GoLogin() {
 	user := []models.User{}
 	models.DB.Where("phone=? AND password=?", phone, password).Find(&user)
 	if len(user) > 0 {
-		models.Cookie.Set(c.Ctx, "userinfo", user[0])
+		models.Cookie{}.Set(c.Ctx, "userinfo", user[0])
 		c.Data["json"] = map[string]interface{}{
 			"success": true,
 			"msg":     "用户登陆成功",
@@ -148,7 +148,7 @@ func (c *UserController) GoLogin() {
 }
 
 func (c *UserController) LoginOut() {
-	models.Cookie.Remove(c.Ctx, "userinfo", "")
+	models.Cookie{}.Remove(c.Ctx, "userinfo", "")
 	c.Redirect(c.Ctx.Request.Referer(), 302)
 }
 func (c *UserController) RegisterStep1() {
@@ -381,7 +381,7 @@ func (c *UserController) GoRegister() {
 		}
 		models.DB.Create(&user)
 
-		models.Cookie.Set(c.Ctx, "userinfo", user)
+		models.Cookie{}.Set(c.Ctx, "userinfo", user)
 		c.Redirect("/", 302)
 	} else {
 		c.Redirect("/auth/registerStep1", 302)

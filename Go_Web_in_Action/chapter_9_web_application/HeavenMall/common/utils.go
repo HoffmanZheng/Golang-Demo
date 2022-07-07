@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
+	"github.com/astaxie/beego/logs"
 	"io/ioutil"
 	"math/rand"
 	"path"
@@ -12,8 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/astaxie/beego/core/logs"
-	"github.com/astaxie/beego/server/web"
+	"github.com/astaxie/beego"
 	"github.com/gomarkdown/markdown"
 )
 
@@ -80,8 +80,7 @@ func SendMsg(str string) {
 
 func ResizeImage(filename string) {
 	extName := path.Ext(filename)
-	resizeImageSize, _ := web.AppConfig.String("resizeImageSize")
-	resizeImage := strings.Split(resizeImageSize, ",")
+	resizeImage := strings.Split(beego.AppConfig.String("resizeImageSize"), ",")
 
 	for i := 0; i < len(resizeImage); i++ {
 		w := resizeImage[i]
@@ -96,7 +95,7 @@ func ResizeImage(filename string) {
 }
 
 func FormatImage(picName string) string {
-	ossStatus, err := web.AppConfig.Bool("ossStatus")
+	ossStatus, err := beego.AppConfig.Bool("ossStatus")
 	if err != nil {
 		flag := strings.Contains(picName, "/static")
 		if flag {
@@ -106,12 +105,7 @@ func FormatImage(picName string) string {
 	}
 
 	if ossStatus {
-		ossDomain, err := web.AppConfig.String("ossDomain")
-		if err != nil {
-			return ossDomain + "/" + picName
-		} else {
-			return "error"
-		}
+		return beego.AppConfig.String("ossDomain") + "/" + picName
 	} else {
 		flag := strings.Contains(picName, "/static")
 		if flag {

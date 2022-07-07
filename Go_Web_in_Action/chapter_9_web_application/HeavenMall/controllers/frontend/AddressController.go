@@ -8,7 +8,7 @@ type AddressController struct {
 
 func (c *AddressController) AddAddress() {
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	name := c.GetString("name")
 	phone := c.GetString("phone")
 	address := c.GetString("address")
@@ -63,7 +63,7 @@ func (c *AddressController) GetOneAddressList() {
 
 func (c *AddressController) GoEditAddressList() {
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	addressId, err := c.GetInt("address_id")
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
@@ -100,7 +100,7 @@ func (c *AddressController) GoEditAddressList() {
 
 func (c *AddressController) ChangeDefaultAddress() {
 	user := models.User{}
-	models.Cookie.Get(c.Ctx, "userinfo", &user)
+	models.Cookie{}.Get(c.Ctx, "userinfo", &user)
 	addressId, err := c.GetInt("address_id")
 	if err != nil {
 		c.Data["json"] = map[string]interface{}{
