@@ -10,7 +10,7 @@ The sample code and README of each chapter is in respective directory:
 6. [Go File Processing](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Web_in_Action/chapter_6_file_process) (TODO)
 7. [Concurrent Programming in Go](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Web_in_Action/chapter_7_go_concurrency)
 8. [Go RESTful API Interface Development](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Web_in_Action/chapter_8_go_RESTful)
-9. [Go Web Project in Action](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Web_in_Action/chapter_9_web_application) (in process)
+9. [Go Web Project in Action](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Web_in_Action/chapter_9_web_application) (In Process)
 10. [Deploy Go Web Applications with Docker](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Web_in_Action/chapter_10_docker_deploy) (TODO)
 
 
