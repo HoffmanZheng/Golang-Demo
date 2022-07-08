@@ -1,19 +1,19 @@
 package main
 
 import (
-	"config"
 	"context"
-	"discover"
-	"endpoint"
 	"flag"
 	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
-	"service"
+	"service_registry_and_discovery/config"
+	"service_registry_and_discovery/discover"
+	"service_registry_and_discovery/endpoint"
+	"service_registry_and_discovery/service"
+	"service_registry_and_discovery/transport"
 	"strconv"
 	"syscall"
-	"transport"
 
 	uuid "github.com/satori/go.uuid"
 )

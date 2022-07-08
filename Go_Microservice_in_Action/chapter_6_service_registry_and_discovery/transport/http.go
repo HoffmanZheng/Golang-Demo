@@ -3,9 +3,9 @@ package transport
 import (
 	"context"
 	"encoding/json"
-	"endpoint"
 	"errors"
 	"net/http"
+	"service_registry_and_discovery/endpoint"
 
 	"github.com/go-kit/kit/log"
 

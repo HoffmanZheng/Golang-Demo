@@ -1,10 +1,10 @@
 package service
 
 import (
-	"config"
 	"context"
-	"discover"
 	"errors"
+	"service_registry_and_discovery/config"
+	"service_registry_and_discovery/discover"
 )
 
 type Service interface {

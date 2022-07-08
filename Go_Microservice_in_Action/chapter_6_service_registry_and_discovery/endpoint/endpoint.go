@@ -4,7 +4,7 @@ package endpoint
 // 并将处理结果封装为 response 返回给 transport 层
 import (
 	"context"
-	"service"
+	"service_registry_and_discovery/service"
 
 	"github.com/go-kit/kit/endpoint"
 )
