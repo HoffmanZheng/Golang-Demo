@@ -104,9 +104,44 @@ func (consulClient *MyDiscoverClient) Register(serviceName, instanceId, healthCh
 }
 
 func (consulClient *MyDiscoverClient) DeRegister(instanceId string, logger *log.Logger) bool {
+	req, _ := http.NewRequest("PUT",
+		"http://"+consulClient.Host+":"+strconv.Itoa(consulClient.Port)+"/v1/agent/service/deregister/"+instanceId, nil)
+	client := http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("Deregister Service Error!")
+	} else {
+		resp.Body.Close()
+		if resp.StatusCode == 200 {
+			log.Println("Deregister Service Success!")
+			return true
+		} else {
+			log.Println("Deregister Service Error!")
+		}
+	}
 	return false
 }
 
 func (consulClient *MyDiscoverClient) DiscoverServices(serviceName string, logger *log.Logger) []interface{} {
+	req, _ := http.NewRequest("GET",
+		"http://"+consulClient.Host+":"+strconv.Itoa(consulClient.Port)+"/v1/health/service/"+serviceName, nil)
+	client := http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Println("Discover Service Error!")
+	} else if resp.StatusCode == 200 {
+		var serviceList []struct {
+			Service InstanceInfo `json:"Service"`
+		}
+		err = json.NewDecoder(resp.Body).Decode(&serviceList)
+		resp.Body.Close()
+		if err == nil {
+			instances := make([]interface{}, len(serviceList))
+			for i := 0; i < len(serviceList); i++ {
+				instances[i] = serviceList[i].Service
+			}
+			return instances
+		}
+	}
 	return nil
 }

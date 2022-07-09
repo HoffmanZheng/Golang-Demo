@@ -14,12 +14,13 @@ import (
 	"service_registry_and_discovery/transport"
 	"strconv"
 	"syscall"
+	"time"
 
 	uuid "github.com/satori/go.uuid"
 )
 
 func main() {
-	//  consul　启动命令：consul agent -dev
+	// consul　启动命令：consul agent -dev
 	// 从命令行读取相关参数，没有时使用默认值
 	var (
 		servicePort = flag.Int("service.port", 10086, "service port")
@@ -58,6 +59,12 @@ func main() {
 		}
 		handler := r
 		errChan <- http.ListenAndServe(":"+strconv.Itoa(*servicePort), handler)
+	}()
+
+	go func() {
+		time.Sleep(2 * time.Second)
+		res := discoveryClient.DiscoverServices("SayHello", config.Logger)
+		config.Logger.Println("fetch instance list from consul: ", res)
 	}()
 
 	go func() {
