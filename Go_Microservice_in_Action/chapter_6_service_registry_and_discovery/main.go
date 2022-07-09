@@ -35,7 +35,7 @@ func main() {
 
 	// TODO: 没有初始化服务发现客户端
 	var discoveryClient discover.DiscoveryClient
-	discoveryClient = discover.NewMyDiscoverClient(*consulHost, *consulPort) // 省略了获取服务发现客户端失败的处理
+	discoveryClient, _ = discover.NewKitDiscoverClient(*consulHost, *consulPort) // 省略了获取服务发现客户端失败的处理
 	var svc = service.NewDiscoveryServiceImpl(discoveryClient)
 	sayHelloEndPoint := endpoint.MakeSayHelloEndPoint(svc)
 	discoveryEndpoint := endpoint.MakeDiscoveryEndPoint(svc)

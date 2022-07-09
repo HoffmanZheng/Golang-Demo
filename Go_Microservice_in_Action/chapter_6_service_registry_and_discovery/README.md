@@ -12,4 +12,6 @@
 
 ### Demo: Interact with Consul
 
-1. 
+1. In order to accomplish the service registry and discovery, we could call the HTTP API of Consul directly, see: [discover/myDiscoverClient.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Microservice_in_Action/chapter_6_service_registry_and_discovery/discover/myDiscoverClient.go)
+
+2. [Go-kit](https://github.com/go-kit/kit) framework provides the implementation of some common service registry center, such as Consul, Zookeeper, Etcd, Eureka. It's quite convenient for developer to use, see: [discover/kitDiscoverClient.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Microservice_in_Action/chapter_6_service_registry_and_discovery/discover/kitDiscoverClient.go)
