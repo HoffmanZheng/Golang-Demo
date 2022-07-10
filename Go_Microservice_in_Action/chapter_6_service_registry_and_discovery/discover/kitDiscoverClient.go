@@ -1,17 +1,22 @@
 package discover
 
 import (
+	"github.com/hashicorp/consul/api/watch"
 	"log"
 	"strconv"
+	"sync"
 
 	"github.com/go-kit/kit/sd/consul"
 	"github.com/hashicorp/consul/api"
 )
 
 type KitDiscoverClient struct {
-	Host   string
-	Port   int
-	client consul.Client
+	Host         string
+	Port         int
+	client       consul.Client
+	config       *api.Config
+	mutex        sync.Mutex  // atomic lock
+	instancesMap sync.Map    // cache
 }
 
 func NewKitDiscoverClient(consulHost string, consulPort int) (DiscoveryClient, error) {
@@ -26,6 +31,7 @@ func NewKitDiscoverClient(consulHost string, consulPort int) (DiscoveryClient, e
 		Host:   consulHost,
 		Port:   consulPort,
 		client: client,
+		config: consulConfig,
 	}, err
 }
 
@@ -67,8 +73,51 @@ func (consulClient KitDiscoverClient) DeRegister(instanceId string, logger *log.
 }
 
 func (consulClient KitDiscoverClient) DiscoverServices(serviceName string, logger *log.Logger) []interface{} {
+
+	// try to load from cache
+	instanceList, ok := consulClient.instancesMap.Load(serviceName)
+	if ok {
+		return instanceList.([]interface{})
+	}
+
+	consulClient.mutex.Lock()
+	instanceList, ok = consulClient.instancesMap.Load(serviceName)
+	if ok {
+		return instanceList.([]interface{})
+	} else {
+		go func() {
+			params := make(map[string]interface{})
+			params["type"] = "service"
+			params["service"] = serviceName
+			plan, _ := watch.Parse(params)
+			plan.Handler = func(u uint64, i interface{}) {
+				if i == nil {
+					return
+				}
+				v, ok := i.([]*api.ServiceEntry)
+				if !ok {
+					return // data error, ignore
+				}
+				if len(v) == 0 {   // no instance online
+					consulClient.instancesMap.Store(serviceName, []interface{}{})
+				}
+				var healthServices []interface{}
+				for _, service := range v {
+					if service.Checks.AggregatedStatus() == api.HealthPassing {
+						healthServices = append(healthServices, service.Service)
+					}
+				} // update the cache once instance list varies
+				consulClient.instancesMap.Store(serviceName, healthServices)
+			}
+			defer plan.Stop()
+			plan.Run(consulClient.config.Address)
+		}()
+	}
+	defer consulClient.mutex.Unlock()
+
 	entries, _, err := consulClient.client.Service(serviceName, "", false, nil)
 	if err != nil {
+		consulClient.instancesMap.Store(serviceName, []interface{}{})
 		log.Println("Discover Service Error!")
 		return nil
 	}
@@ -77,5 +126,6 @@ func (consulClient KitDiscoverClient) DiscoverServices(serviceName string, logge
 	for i := 0; i < len(entries); i++ {
 		instances[i] = entries[i].Service
 	}
+	consulClient.instancesMap.Store(serviceName, instances)
 	return instances
 }

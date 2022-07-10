@@ -42,11 +42,11 @@ type MyDiscoverClient struct {
 	Port int
 }
 
-func NewMyDiscoverClient(consulHost string, consulPort int) DiscoveryClient {
+func NewMyDiscoverClient(consulHost string, consulPort int) (DiscoveryClient, error) {
 	return &MyDiscoverClient{
 		Host: consulHost,
 		Port: consulPort,
-	}
+	}, nil
 }
 
 func (consulClient *MyDiscoverClient) Register(serviceName, instanceId, healthCheckUrl, instanceHost string,
