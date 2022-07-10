@@ -2,8 +2,8 @@
 
 The sample code and README of each chapter is in respective directory:
 
-6. [Service Registry and Discovery](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_6_service_registry_and_discovery) (In Process)
-7. [Remote Procedure Call RPC](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call) (TODO)
+6. [Service Registry and Discovery](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_6_service_registry_and_discovery)
+7. [Remote Procedure Call RPC](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call) (In Progress)
 8. [Distributed Configuration Center](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_8_distributed_configuration_center) (TODO)
 9. [Microservice Gateway](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_9_microservice_gateway) (TODO)
 10. [Fault Tolerance and Load Balance](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_10_fault_tolerance_and_load_balance) (TODO)
