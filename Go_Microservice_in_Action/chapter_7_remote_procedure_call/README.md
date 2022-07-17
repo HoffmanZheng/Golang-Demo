@@ -16,7 +16,7 @@
 
 1. Golang native rpc lib `net/rpc` provides the access to object methods by `Register`, see: [/basic/server.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/basic/server.go). It would obtain all RPC suitable methods from object, and save them into a map (server stub). When receive a request from client, server would parse(through specified protocol) and get the method from the stub, and call the corresponding method by reflection.
 
-2. The client could call synchronizely or asynchronizely, async call is implemented by goroutine, and the result is received(waited) by done channel, see: [/basic/client.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Microservice_in_Action/chapter_7_remote_precedure_call/basic/client.go). Each RPC request will generate a Call object(include method, param, return value), and be saved in a map (client stub). When client receive the response from server, it will fetch stub from map and deserialize the return value.
+2. The client could call synchronizely or asynchronizely, async call is implemented by goroutine, and the result is received(waited) by done channel, see: [/basic/client.go](https://github.com/HoffmanZheng/Golang-Demo/blob/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/basic/client.go). Each RPC request will generate a Call object(include method, param, return value), and be saved in a map (client stub). When client receive the response from server, it will fetch stub from map and deserialize the return value.
 
 3. Every RPC request creates request and response struct repeatedly, which leads to some GC pressure. In order to reuse the request and response struct, an object pool was created, object will be freed after they're used.
 
@@ -26,4 +26,6 @@
 
 1. gRPC is an open-source, high performance, universal RPC framework, it supports multiple languages. Based on the HTTP/2 standard, it could realize the headers compression, request reusage, and client application communication.
 
-2. 
+2. Protocol compiler: `protoc --proto_path=pb --go_out=pb --go_opt=paths=source_relative string.proto`
+
+3. 
