@@ -26,6 +26,6 @@
 
 1. gRPC is an open-source, high performance, universal RPC framework, it supports multiple languages. Based on the HTTP/2 standard, it could realize the headers compression, request reusage, and client application communication.
 
-2. Protocol compiler: `protoc --proto_path=pb --go_out=pb --go_opt=paths=source_relative string.proto`
+2. Protocol compiler: `protoc --proto_path=pb --go_out=plugins=grpc:pb  --go_opt=paths=source_relative string.proto`
 
 3. 

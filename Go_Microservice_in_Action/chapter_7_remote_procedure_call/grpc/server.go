@@ -4,10 +4,11 @@ import (
 	"flag"
 	"net"
 
-	string_service "grpc/string-service"
+	string_service "grpc/stringService"
 
-	"github.com/HoffmanZheng/Golang-Demo/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb"
-	"github.com/prometheus/common/log"
+	"log"
+
+	pb "github.com/HoffmanZheng/Golang-Demo/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb"
 	"google.golang.org/grpc"
 )
 

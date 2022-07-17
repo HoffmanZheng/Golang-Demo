@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/HoffmanZheng/Golang-Demo/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb"
+	pb "github.com/HoffmanZheng/Golang-Demo/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb"
 )
 
 const (
