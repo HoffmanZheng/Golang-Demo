@@ -30,4 +30,4 @@
 
 3. Using stream transport could improve the performance, see: [/stream](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/stream)
 
-4. 
+4. [Go-kit](https://github.com/go-kit/kit) could make up the deficiency of the gRPC service government, it's abstract layer `endpoint` let developer easily embed other microservice component, such as circuit breaker, rate limiter, logging, metrics, request tracing, registry and discovery, etc.
