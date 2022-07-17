@@ -26,6 +26,6 @@
 
 1. gRPC is an open-source, high performance, universal RPC framework, it supports multiple languages. Based on the HTTP/2 standard, it could realize the headers compression, request reusage, and client application communication.
 
-2. Protocol compiler: `protoc --proto_path=pb --go_out=plugins=grpc:pb  --go_opt=paths=source_relative string.proto`
+2. Protocol compiler: `protoc --proto_path=pb --go_out=plugins=grpc:pb  --go_opt=paths=source_relative string.proto`. Server and client both depend on the generated [proto files](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb), a gRPC demo located at [/grpc](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/grpc)
 
-3. 
+3. Using stream transport could improve the performance,

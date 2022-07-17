@@ -3,7 +3,7 @@ module grpc
 go 1.17
 
 require (
-	github.com/HoffmanZheng/Golang-Demo v0.0.0-20220717070510-01dd5cabbaa4
+	github.com/HoffmanZheng/Golang-Demo v0.0.0-20220717074414-edb374dbec1f
 	google.golang.org/grpc v1.48.0
 )
 
