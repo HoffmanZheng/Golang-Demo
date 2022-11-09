@@ -28,6 +28,6 @@
 
 2. Protocol compiler: `protoc --proto_path=pb --go_out=plugins=grpc:pb  --go_opt=paths=source_relative string.proto`. Server and client both depend on the generated [proto files](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb), a gRPC demo located at [/grpc](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/grpc)
 
-3. Using stream transport could improve the performance, see: [/stream](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/stream)
+3. Using stream transport could improve the performance, see: [/stream](https://github.com/HoffmanZheng/Golang-Demo/tree/master/Go_Microservice_in_Action/chapter_7_remote_procedure_call/stream), reference: [《gRPC over HTTP2》](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md)
 
 4. [Go-kit](https://github.com/go-kit/kit) could make up the deficiency of the gRPC service government, it's abstract layer `endpoint` let developer easily embed other microservice component, such as circuit breaker, rate limiter, logging, metrics, request tracing, registry and discovery, etc.
