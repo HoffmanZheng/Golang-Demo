@@ -3,6 +3,7 @@ package stringService
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strings"
 
 	pb "github.com/HoffmanZheng/Golang-Demo/Go_Microservice_in_Action/chapter_7_remote_procedure_call/pb"
@@ -22,11 +23,13 @@ var (
 type StringService struct{}
 
 func (s *StringService) Concat(ctx context.Context, req *pb.StringRequest) (*pb.StringResponse, error) {
+	fmt.Println("start request Concat: ", req.A, req.B)
 	if len(req.A)+len(req.B) > StrMaxSize {
-		response := pb.StringResponse{Ret: ""}
+		response := pb.StringResponse{Ret: "11"}
 		return &response, nil
 	}
 	response := pb.StringResponse{Ret: req.A + req.B}
+	fmt.Println("output result of concat: ", response)
 	return &response, nil
 }
 
