@@ -34,9 +34,11 @@ func (impl *DiscoverServiceImpl) DiscoveryService(ctx context.Context,
 }
 
 func (impl *DiscoverServiceImpl) SayHello() string {
+	config.Logger.Println("start to handle sayHello request")
 	return "hello world!"
 }
 
 func (impl *DiscoverServiceImpl) HealthCheck() bool {
+	config.Logger.Println("start to handle healthCheck request")
 	return true
 }

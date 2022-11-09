@@ -20,7 +20,7 @@ import (
 )
 
 func main() {
-	// consul　启动命令：consul agent -dev
+	// consul　启动命令：Windows: consul agent -dev / Mac: brew services start consul
 	// 从命令行读取相关参数，没有时使用默认值
 	var (
 		servicePort = flag.Int("service.port", 10086, "service port")
@@ -35,7 +35,8 @@ func main() {
 
 	// TODO: 没有初始化服务发现客户端
 	var discoveryClient discover.DiscoveryClient
-	discoveryClient, _ = discover.NewKitDiscoverClient(*consulHost, *consulPort) // 省略了获取服务发现客户端失败的处理
+	// 省略了获取服务发现客户端失败的处理  可以改成 NewMyDiscoverClient
+	discoveryClient, _ = discover.NewKitDiscoverClient(*consulHost, *consulPort)
 	var svc = service.NewDiscoveryServiceImpl(discoveryClient)
 	sayHelloEndPoint := endpoint.MakeSayHelloEndPoint(svc)
 	discoveryEndpoint := endpoint.MakeDiscoveryEndPoint(svc)
