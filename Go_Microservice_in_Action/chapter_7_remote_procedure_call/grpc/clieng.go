@@ -14,7 +14,12 @@ func main() {
 	if err != nil {
 		panic("connect error")
 	}
-	defer conn.Close()
+	defer func(conn *grpc.ClientConn) {
+		err := conn.Close()
+		if err != nil {
+			fmt.Println("failed to close Client connection in defer")
+		}
+	}(conn)
 	bookClient := pb.NewStringServiceClient(conn)
 	stringReq := &pb.StringRequest{A: "A", B: "B"}
 	reply, _ := bookClient.Concat(context.Background(), stringReq)

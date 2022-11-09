@@ -107,6 +107,7 @@ func (consulClient KitDiscoverClient) DiscoverServices(serviceName string, logge
 						healthServices = append(healthServices, service.Service)
 					}
 				} // update the cache once instance list varies
+				log.Println("fetch the service list from watching: ", healthServices)
 				consulClient.instancesMap.Store(serviceName, healthServices)
 			}
 			defer plan.Stop()

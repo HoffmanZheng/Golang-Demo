@@ -134,7 +134,10 @@ func (consulClient *MyDiscoverClient) DiscoverServices(serviceName string, logge
 			Service InstanceInfo `json:"Service"`
 		}
 		err = json.NewDecoder(resp.Body).Decode(&serviceList)
-		resp.Body.Close()
+		err := resp.Body.Close()
+		if err != nil {
+			return nil
+		}
 		if err == nil {
 			instances := make([]interface{}, len(serviceList))
 			for i := 0; i < len(serviceList); i++ {
